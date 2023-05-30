@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerik="using:Telerik.UI.Xaml.Controls"
+    xmlns:telerikReporting="using:Telerik.ReportViewer.WinUI"
     mc:Ignorable="d">
 
     <Grid>
@@ -13,7 +14,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="{ThemeResource DemoBackgroundBrush}">
+        <!--<Grid Grid.Row="0" Background="{ThemeResource DemoBackgroundBrush}">
             <Button
                 Margin="10,0,0,0"
                 HorizontalAlignment="Left"
@@ -22,7 +23,13 @@
                 Content="Print report"
                 Foreground="{ThemeResource SystemBaseHighColor}" />
 
-        </Grid>
-        <telerik:RadPdfViewer x:Name="pdfViewer" Grid.Row="1" />
+        </Grid>-->
+        <!--<telerik:RadPdfViewer x:Name="pdfViewer" Grid.Row="1" />-->
+        <telerikReporting:ReportViewer
+            x:Name="reportViewer"
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            />
     </Grid>
 </Window>

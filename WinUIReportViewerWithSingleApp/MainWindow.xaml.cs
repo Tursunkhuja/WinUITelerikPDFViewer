@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Reflection.Metadata;
+using Telerik.ReportViewer.Common;
 using Telerik.Windows.Documents.Fixed.FormatProviders.Pdf;
 using Telerik.Windows.Documents.Fixed.FormatProviders.Pdf.Import;
 using Telerik.Windows.Documents.Fixed.Model;
@@ -19,27 +20,34 @@ namespace WinUIApp
         public MainWindow()
         {
             this.InitializeComponent();
-            
-            string fileName =   @"..\..\..\..\..\PDF\Barcodes Report.pdf";
-            string pdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
 
-            MemoryStream stream = new MemoryStream();
+            //string fileName =   @"..\..\..\..\..\PDF\Barcodes Report.pdf";
+            //string pdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            //MemoryStream stream = new MemoryStream();
 
-            using (Stream input = File.OpenRead(pdfFilePath))
+            //using (Stream input = File.OpenRead(pdfFilePath))
+            //{
+            //    input.CopyTo(stream);
+            //}
+
+            //PdfFormatProvider provider = new PdfFormatProvider();
+            //provider.ImportSettings = PdfImportSettings.ReadOnDemand;
+            //RadFixedDocument doc = provider.Import(stream);
+            //this.pdfViewer.Document = doc;
+
+
+            var engineConnection = new RestServiceConnectionInfo("https://localhost:49169/api/reports/");
+            reportViewer.ReportEngineConnection = engineConnection.ConnectionString;
+            reportViewer.ReportSource = new Telerik.Reporting.UriReportSource()
             {
-                input.CopyTo(stream);
-            }
-
-            PdfFormatProvider provider = new PdfFormatProvider();
-            provider.ImportSettings = PdfImportSettings.ReadOnDemand;
-            RadFixedDocument doc = provider.Import(stream);
-            this.pdfViewer.Document = doc;
+                Uri= "Orders report.trdx"
+            };
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            pdfViewer.Print();
+            //pdfViewer.Print();
         }
     }
 }
