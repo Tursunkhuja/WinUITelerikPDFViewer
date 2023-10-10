@@ -37,12 +37,25 @@ namespace WinUIApp
             //this.pdfViewer.Document = doc;
 
 
-            var engineConnection = new RestServiceConnectionInfo("https://localhost:49169/api/reports/");
-            reportViewer.ReportEngineConnection = engineConnection.ConnectionString;
-            reportViewer.ReportSource = new Telerik.Reporting.UriReportSource()
+            #region Use separate Reporting REST service
+            //var engineConnection = new RestServiceConnectionInfo("https://localhost:49169/api/reports/");
+            //reportViewer.ReportEngineConnection = engineConnection.ConnectionString;
+            //reportViewer.ReportSource = new Telerik.Reporting.UriReportSource()
+            //{
+            //    Uri= "Orders report.trdx"
+            //};
+            #endregion
+
+            #region Use local report, keep WinUI-rendering
+            string reportFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports/BlankReport.trdx");
+            if (File.Exists(reportFilePath))
             {
-                Uri= "Orders report.trdx"
-            };
+                reportViewer.ReportSource = new Telerik.Reporting.UriReportSource()
+                {
+                    Uri = reportFilePath
+                };
+            }
+            #endregion
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
